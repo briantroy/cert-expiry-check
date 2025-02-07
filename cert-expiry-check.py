@@ -87,7 +87,8 @@ def send_pushover_notification(message_content, app_config):
 app_config = check_config_file()
 if not app_config:
     sys.exit()
-                                                                                                                                                                                                   
+
+print("INFO: {} -- Checking Certificates for expiry.".format(datetime.datetime.now()))                                                                                                                                                                                                   
 current_time_ts = time.time()                                                                                                                                                                      
 local_time = time.ctime(current_time_ts)
 date_today = date.today().strftime("%m-%d-%Y")   
