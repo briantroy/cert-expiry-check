@@ -1,4 +1,4 @@
-This script checks the expiry date for each of your Certbot (Let's Encrypt) certificates and sends a pushover notification if the cetificate is "near expiry" - with the threshold for near being set in the config json via the "notification_threshold_days".
+This script checks the expiry date for each of your Certbot (Let's Encrypt) certificates and sends a pushover (https://pushover.net/) notification if the cetificate is "near expiry" - with the threshold for near being set in the config json via the "notification_threshold_days".
 
 The script must run with a user privileged to perform "certbot certificates" to list your existing certificates. It currently assumes you have only VALID certificates (no old expired or invalid certs haning around). See certbot delete to clean up your old unused/expired certs.
 
