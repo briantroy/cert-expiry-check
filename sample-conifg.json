@@ -1,0 +1,6 @@
+{
+    "pushover_app_token": "shhh",
+    "pushover_user_token": "secret",
+    "host_identifier": "DEVHOST",
+    "notification_threshold_days": 14
+}
