@@ -109,17 +109,26 @@ for cert_line in certs_info:
         cert_days_remaining = cert_line.split("(VALID: ")[1]
         cert_days_remaining = cert_days_remaining.split(" days)")[0]
         #print("Days remaining {}".format(cert_days_remaining))
-        cert_expiry_date = cert_expiry_date.split(" (VALID: ")[0].replace(" (VALID", "")
+        if "VALID: " in cert_expiry_date: 
+            cert_expiry_date = cert_expiry_date.split(" (VALID: ")[0].replace(" (VALID", "")
+            cert_status = "Valid"
+        elif "EXPIRED: " in cert_expiry_date:
+            cert_expiry_date = cert_expiry_date.split(" (EXPIRED: ")[0].replace(" (EXPIRED", "")
+            cert_status = "Expired"
+        #fin            
         cert_expiry_date = datetime.datetime.strptime(cert_expiry_date, "%Y-%m-%d %H:%M:%S%z")
         cert_expiry_date_str = cert_expiry_date.strftime("%m-%d-%Y")
         #print("Cert Expiry Date: ", cert_expiry_date_str)
 
-        cert_message = "Cert Expiry Date for {} is: {} (in {} days).\n".format(cert_name, cert_expiry_date_str, cert_days_remaining)
+        if cert_status == "Expired":
+            cert_message = ("Cert {} has expired on {}.\n".format(cert_name, cert_expiry_date_str))
+        elif cert_status == "Valid":
+            cert_message = "Cert Expiry Date for {} is: {} (in {} days).\n".format(cert_name, cert_expiry_date_str, cert_days_remaining)
         print(cert_message)
 
         if int(cert_days_remaining) <= int(get_config_item(app_config, 'notification_threshold_days')):
             print("Cert {} Expiry Date is in {} days or less, sending notification.".format(cert_name, get_config_item(app_config, 'notification_threshold_days')))
-            notification_message = notification_message + ("Cert Expiry Date for {} is: {} (in {} days).\n".format(cert_name, cert_expiry_date_str, cert_days_remaining))
+            notification_message = notification_message + cert_message
         # end if
     # end if
 
