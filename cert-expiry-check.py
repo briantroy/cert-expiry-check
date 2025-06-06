@@ -116,6 +116,7 @@ for cert_line in certs_info:
             cert_expiry_date = cert_expiry_date.split(" (EXPIRED: ")[0].replace(" (EXPIRED", "")
             cert_status = "Expired"
         #fin            
+        print("Cert Expiry Date: ", cert_expiry_date)
         cert_expiry_date = datetime.datetime.strptime(cert_expiry_date, "%Y-%m-%d %H:%M:%S%z")
         cert_expiry_date_str = cert_expiry_date.strftime("%m-%d-%Y")
         #print("Cert Expiry Date: ", cert_expiry_date_str)
