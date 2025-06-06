@@ -109,12 +109,12 @@ for cert_line in certs_info:
         print("Cert Line: ", cert_line)
         print("Cert Expiry Date: ", cert_expiry_date)
         #print("Days remaining {}".format(cert_days_remaining))
-        if "VALID" in cert_expiry_date: 
+        if "(VALID" in cert_expiry_date: 
             cert_expiry_date = cert_expiry_date.split(" (VALID: ")[0].replace(" (VALID", "")
             cert_status = "Valid"
             cert_days_remaining = cert_line.split("(VALID: ")[1]
             cert_days_remaining = cert_days_remaining.split(" days)")[0]
-        elif "INVALID" in cert_expiry_date:
+        elif "(INVALID" in cert_expiry_date:
             cert_expiry_date = cert_expiry_date.split(" (INVALID: ")[0].replace(" (INVALID", "")
             cert_status = "Expired"
             cert_days_remaining = cert_line.split("(INVALID: ")[1]
